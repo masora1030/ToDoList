@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>My ToDo List APP</title>
+</head>
+<body>
+
+    <hr />
+    
+    <h3>ToDoTaskの編集</h3>
+       <form  method="post" th:action="@{/update}" th:object="${toDoListEditForm.task}">
+       				 <p>タスクの名前：<input type="text" name="tasknamenext" maxlength='31' placeholder="${toDoListEditForm.task.taskname}" required /> ＊必須 </p>
+       				 <p>締め切り日時：<input type="date" name="deadlinenext" placeholder = "${toDoListEditForm.task.deadline}" pattern = "2[0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]+$" required></input> ＊必須 </p>
+                     <input type="submit" value="上記内容でToDoTaskを編集する" />
+       </form>
+    
+</body>
+</html>

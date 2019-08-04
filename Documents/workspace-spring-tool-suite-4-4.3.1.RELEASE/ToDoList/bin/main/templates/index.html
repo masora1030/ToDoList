@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>My ToDo List APP</title>
+</head>
+<body>
+    <h2>ToDo List</h2>
+    
+    <a th:unless="${toDoListMainForm.isDone}" th:href="@{/?isDone=true}">完了したアイテムの表示</a>
+    <a th:if="${toDoListMainForm.isDone}" th:href="@{/?isDone=false}">ToDoTaskの表示</a>
+
+    <hr />
+    
+    <h3>ToDoTaskの追加</h3>
+    <form method="post" th:action="@{/new}">
+        <p>タスクの名前：<input type="text" name="taskname" maxlength='31' placeholder='名前を入力してください' required /> ＊必須 </p>
+        <p>締め切り日時：<input type="date" name="deadline" placeholder = 'yyyy-mm-ddという形式で日付を入力してください' pattern = "2[0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]+$" required></input> ＊必須 </p>
+        <input type="submit" value="ToDoタスク追加" />
+    </form>
+    
+    <h3>タスク一覧</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th bgcolor="#FFFFFF"><font color="#EE0000">タスク</font></th>
+                <th bgcolor="#FFFFFF"><font color="#EE0000">締切日</font></th>
+                <th bgcolor="#FFFFFF"><font color="#EE0000">作成日</font></th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr th:each="toDoListTask : ${toDoListMainForm.tasks}">
+                <td th:text="${toDoListTask.taskname}"> </td>
+                <td th:text="${toDoListTask.deadline}"> </td>
+                <td th:text="${toDoListTask.creationdate}"> </td>
+                <td>
+                    <form th:unless="${toDoListMainForm.isDone}" method="post" th:action="@{/done}" th:object="${toDoListTask}">
+                        <input type="hidden" name="task_id" th:value="*{task_id}" />
+                        <input type="submit" value="完了" />
+                    </form>
+                    <form th:if="${toDoListMainForm.isDone}" method="post" th:action="@{/restore}" th:object="${toDoListTask}">
+                        <input type="hidden" name="task_id" th:value="*{task_id}" />
+                        <input type="submit" value="未完了" />
+                    </form>
+                </td>
+                <td>
+                    <form action="/ToDoList/src/main/resources/templates/edit.html" method="get" th:action="@{/edit}" th:object="${toDoListTask}">
+                        <input type="hidden" name="task_id" th:value="*{task_id}" />
+                        <input type="submit" value="編集する" />
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
