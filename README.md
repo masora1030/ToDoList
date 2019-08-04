@@ -9,9 +9,13 @@ Initializr: Spring Initializr
 PullDown:   Gradle
 
 JPA:        'org.springframework.boot:spring-boot-starter-data-jpa'
+
 Thymeleaf:	'org.springframework.boot:spring-boot-starter-thymeleaf'
+
 Web:        'org.springframework.boot:spring-boot-starter-web'
+
 Devtool:    'org.springframework.boot:spring-boot-devtools'
+
 SQL:        'mysql:mysql-connector-java'
 
 View:       HTML5
@@ -50,11 +54,17 @@ Controllerでは、FormとViewとMySQLの間でタスクのデータを連携さ
 3. 自動生成された、application.propatiesを以下のようにする。
 
 spring.datasource.url=jdbc:mysql://localhost:3306/todolist
+
 spring.datasource.username=todolist
+
 spring.datasource.password=todolist
+
 spring.datasource.driverClassName=com.mysql.cj.jdbc.Driver
+
 spring.jpa.database=MYSQL
+
 spring.jpa.hibernate.ddl-auto=update
+
 server.port=8080
 
 4. StrngBootSuite4の、「プロジェクト ＞ チーム ＞ 共有」 から、githubのパスを通して、
